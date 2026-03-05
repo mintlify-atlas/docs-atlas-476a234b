@@ -1,0 +1,72 @@
+{
+  "projectType": "frontend",
+  "projectName": "Proyecto Neptuno",
+  "projectDescription": "A responsive HTML/CSS website showcasing a fictional shopping center renovation project in Granada, Spain.",
+  "theme": "almond",
+  "primaryColor": "#8B1D1D",
+  "lightColor": "#A32A2A",
+  "darkColor": "#6B1515",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "introduction",
+          "quickstart",
+          "deployment"
+        ]
+      },
+      {
+        "group": "Project Structure",
+        "pages": [
+          "structure/overview",
+          "structure/pages",
+          "structure/navigation"
+        ]
+      },
+      {
+        "group": "Styling",
+        "pages": [
+          "styling/css-architecture",
+          "styling/color-system",
+          "styling/typography",
+          "styling/responsive-design"
+        ]
+      },
+      {
+        "group": "Components",
+        "pages": [
+          "components/header",
+          "components/footer",
+          "components/forms",
+          "components/cards",
+          "components/hero-sections"
+        ]
+      },
+      {
+        "group": "Customization",
+        "pages": [
+          "customization/colors",
+          "customization/fonts",
+          "customization/layout"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Fully responsive design with mobile-first approach",
+    "CSS custom properties for consistent theming",
+    "Hamburger menu navigation for mobile devices",
+    "Multi-page structure with unified navigation",
+    "Contact form with dynamic profile-based fields",
+    "Image galleries with webp optimization"
+  ],
+  "publicApiSurface": [
+    "index.html - Homepage with hero section and feature cards",
+    "ocio.html - Entertainment and leisure offerings page",
+    "gastro.html - Gastronomy and dining options page",
+    "proyecto.html - Project details and architectural renders",
+    "contact.html - Multi-profile contact form",
+    "style.css - Complete styling system with CSS variables"
+  ]
+}
