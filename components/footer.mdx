@@ -1,0 +1,134 @@
+---
+title: Footer Component
+description: Dark footer with copyright text and navigation links
+---
+
+The footer component appears on all pages with a dark background, copyright information, and secondary navigation.
+
+## Structure
+
+The footer contains:
+- Copyright text
+- Secondary navigation menu with all main site links
+- Responsive flexbox layout
+
+## HTML Code
+
+Extracted from `index.html` (lines 62-73):
+
+```html
+<footer>
+    <div class="footer-inner">
+        <p class="footer-copy">2026 Proyecto Neptuno — Propuesta de renovación ficticia para Granada</p>
+        <nav class="footer-nav" aria-label="Navegación secundaria">
+            <a href="./index.html">Inicio</a>
+            <a href="./ocio.html">Ocio</a>
+            <a href="./gastro.html">Gastronomía</a>
+            <a href="./proyecto.html">El proyecto</a>
+            <a href="./contact.html">Contacto</a>
+        </nav>
+    </div>
+</footer>
+```
+
+## CSS Styling
+
+From `style.css` (lines 914-949):
+
+```css
+footer {
+    background-color: var(--bg-footer);
+    padding: 2.5rem 5%;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: var(--texto-muted);
+}
+
+.footer-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-nav a {
+    font-size: 0.8rem;
+    color: var(--texto-muted);
+    text-decoration: none;
+    transition: var(--transicion-suave);
+}
+
+.footer-nav a:hover {
+    color: var(--color-secundario);
+}
+```
+
+## Color Variables
+
+From `style.css` (lines 18, 23, 12):
+
+```css
+:root {
+    --bg-footer: #1A1A1A;         /* Negro Carbón (cierre sólido) */
+    --texto-muted: #6C757D;       /* Gris para detalles */
+    --color-secundario: #B89D64;  /* Dorado Champán (hover) */
+}
+```
+
+## Responsive Behavior
+
+<Tabs>
+  <Tab title="Mobile (≤576px)">
+    From `style.css` (lines 1027-1031):
+
+    ```css
+    @media (max-width: 576px) {
+        .footer-nav {
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem auto;
+        }
+    }
+    ```
+
+    On mobile devices, footer navigation stacks vertically and centers.
+  </Tab>
+  
+  <Tab title="Desktop">
+    - Horizontal layout with `space-between` alignment
+    - Copyright on left, navigation on right
+    - Max-width of 1200px, centered
+    - Links display in a row with 2rem gap
+  </Tab>
+</Tabs>
+
+## Visual Design
+
+<Card title="Dark Background" icon="moon">
+  The footer uses a dark carbon black background (`#1A1A1A`) to create visual closure and separate it from the main content.
+</Card>
+
+<Card title="Hover Effect" icon="hand-pointer">
+  Navigation links transition to golden champagne color (`--color-secundario`) on hover with smooth CSS transitions.
+</Card>
+
+<Card title="Accessibility" icon="universal-access">
+  The footer navigation includes `aria-label="Navegación secundaria"` for screen reader users.
+</Card>
+
+## Key Features
+
+- **Consistent across pages**: Same footer appears on all HTML pages
+- **Flexible layout**: Uses flexbox with `flex-wrap: wrap` for responsive adaptation
+- **Subtle typography**: Small font size (0.8rem) with muted colors
+- **Smooth transitions**: All interactive elements use `var(--transicion-suave)` (0.3s ease)

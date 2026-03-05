@@ -1,0 +1,325 @@
+---
+title: 'Customizing Typography'
+description: 'Learn how to customize fonts and typography in Proyecto Neptuno'
+icon: 'font'
+---
+
+## Overview
+
+Proyecto Neptuno uses a combination of two Google Fonts:
+- **Playfair Display** - For headings and important titles (serif)
+- **Montserrat** - For body text and general content (sans-serif)
+
+This combination creates an elegant, modern aesthetic with clear visual hierarchy.
+
+## Current Font Setup
+
+Here's how fonts are currently configured in `style.css`:
+
+### Font Import
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+```
+
+### Font Declarations
+
+```css
+body {
+    font-family: 'Montserrat';
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+}
+
+h2 {
+    font-weight: 500;
+}
+```
+
+Additional heading styles in specific components:
+
+```css
+.landing-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.page-hero h1 {
+    font-size: 4.5rem;
+}
+
+.gastro-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+```
+
+## How to Change Fonts
+
+<Steps>
+  <Step title="Choose your fonts">
+    Select fonts from [Google Fonts](https://fonts.google.com/) or prepare your own font files. For a similar aesthetic:
+    - Choose a serif or display font for headings
+    - Choose a clean sans-serif for body text
+  </Step>
+  
+  <Step title="Update the font import">
+    Replace the `@import` line at the top of `style.css` (line 6) with your new Google Fonts URL.
+    
+    **Example with different fonts:**
+    ```css
+    @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+    ```
+  </Step>
+  
+  <Step title="Update font-family declarations">
+    Find and replace the font-family values throughout the CSS file.
+    
+    **For body text** (around line 40):
+    ```css
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    ```
+    
+    **For headings** (around line 45):
+    ```css
+    h1 {
+        font-family: 'Lora', serif;
+        font-weight: 800;
+    }
+    ```
+  </Step>
+  
+  <Step title="Update component-specific declarations">
+    Search for `'Playfair Display'` in the CSS file and replace all instances with your new heading font. Key locations include:
+    - `.landing-card h2` (line 198)
+    - `.page-hero h1` (line 291)
+    - `.ocio-bloque__texto h2` (line 390)
+    - `.proyecto-intro h2` (line 479)
+    - `.gastro-card h2` (line 616)
+    - `.gastro-card__numero` (line 602)
+  </Step>
+  
+  <Step title="Test and adjust">
+    Save the file and refresh your browser. Check different pages and adjust font weights and sizes as needed for optimal readability.
+  </Step>
+</Steps>
+
+<Note>
+  When changing fonts, you may need to adjust font-weight values to match what's available in your chosen font family. Check the Google Fonts page for available weights.
+</Note>
+
+## Example Font Combinations
+
+### Modern & Clean
+
+```css
+/* Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* Body */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Headings */
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+}
+```
+
+### Classic & Elegant
+
+```css
+/* Import */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+/* Body */
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+
+/* Headings */
+h1 {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600;
+}
+```
+
+### Bold & Contemporary
+
+```css
+/* Import */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Archivo+Black&display=swap');
+
+/* Body */
+body {
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Headings */
+h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 400;
+}
+```
+
+### Minimalist & Technical
+
+```css
+/* Import */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+/* Body */
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* Headings */
+h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+}
+```
+
+## Using Custom Fonts (Self-Hosted)
+
+If you prefer to use custom fonts instead of Google Fonts:
+
+<Steps>
+  <Step title="Add font files to your project">
+    Create a `fonts` folder in your source directory and add your font files (`.woff`, `.woff2`, `.ttf`).
+  </Step>
+  
+  <Step title="Define @font-face rules">
+    Replace the Google Fonts import with `@font-face` declarations at the top of `style.css`:
+    
+    ```css
+    @font-face {
+        font-family: 'CustomHeading';
+        src: url('./fonts/CustomHeading-Bold.woff2') format('woff2'),
+             url('./fonts/CustomHeading-Bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'CustomBody';
+        src: url('./fonts/CustomBody-Regular.woff2') format('woff2'),
+             url('./fonts/CustomBody-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    ```
+  </Step>
+  
+  <Step title="Apply your custom fonts">
+    Update the font-family declarations:
+    
+    ```css
+    body {
+        font-family: 'CustomBody', sans-serif;
+    }
+    
+    h1 {
+        font-family: 'CustomHeading', serif;
+        font-weight: 700;
+    }
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+  Use `font-display: swap;` in your `@font-face` declarations to prevent invisible text during font loading. This improves perceived performance.
+</Tip>
+
+## Font Size Reference
+
+Key font sizes used throughout the site:
+
+| Element | Size | Location |
+|---------|------|----------|
+| Hero h1 | 6rem | `#hero h1` (line 141) |
+| Hero h2 | 1.1rem | `#hero h2` (line 151) |
+| Page Hero h1 | 4.5rem | `.page-hero h1` (line 292) |
+| Landing Card h2 | 1.8rem | `.landing-card h2` (line 199) |
+| Ocio Block h2 | 2.8rem | `.ocio-bloque__texto h2` (line 391) |
+| Gastro Card h2 | 1.5rem | `.gastro-card h2` (line 617) |
+| Body paragraph | 0.9-1rem | Various |
+| Small labels | 0.72-0.75rem | Various labels |
+
+<Warning>
+  Changing font families may require adjusting font sizes and line heights to maintain visual balance. Always test on multiple screen sizes after making changes.
+</Warning>
+
+## Adjusting Font Weights
+
+The site uses various font weights for hierarchy:
+
+```css
+/* Heavy weights for major headings */
+h1 {
+    font-weight: 800;
+}
+
+/* Medium weights for subheadings */
+h2 {
+    font-weight: 500;
+}
+
+.landing-card h2 {
+    font-weight: 700;
+}
+
+/* Strong emphasis */
+.gastro-card__numero {
+    font-weight: 800;
+}
+
+/* Labels and small text */
+.landing-card__label {
+    font-weight: 700;
+}
+```
+
+When changing fonts, ensure your chosen font family includes the weights you need (400, 500, 600, 700, 800).
+
+## Responsive Font Sizes
+
+Font sizes automatically adjust on smaller screens:
+
+```css
+@media (max-width: 576px) {
+    #hero h1 {
+        font-size: 2.5rem;  /* Down from 6rem */
+    }
+    #hero h2 {
+        font-size: 0.9rem;  /* Down from 1.1rem */
+    }
+    .page-hero h1 {
+        font-size: 2.5rem;  /* Down from 4.5rem */
+    }
+}
+```
+
+When customizing fonts, consider adjusting these responsive values to maintain readability on mobile devices.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Customize Colors" icon="palette" href="/customization/colors">
+    Learn how to change the color scheme
+  </Card>
+  <Card title="Customize Layout" icon="table-columns" href="/customization/layout">
+    Adjust spacing, padding, and responsive breakpoints
+  </Card>
+</CardGroup>

@@ -1,0 +1,526 @@
+---
+title: 'Customizing Layout'
+description: 'Learn how to customize spacing, padding, margins, and responsive behavior'
+icon: 'table-columns'
+---
+
+## Overview
+
+Proyecto Neptuno's layout system controls spacing, container widths, header dimensions, and responsive breakpoints. Understanding these properties allows you to adjust the overall feel and structure of your site.
+
+## Container & Spacing System
+
+### Section Padding
+
+Most sections use consistent padding values for visual rhythm:
+
+```css
+/* Standard section padding */
+.proyecto-seccion {
+    padding: 5rem 5%;
+    background-color: var(--bg-principal);
+}
+
+/* Page hero padding */
+.page-hero {
+    padding: 5rem 5% 4rem;
+    min-height: 30vh;
+}
+
+/* Contact section */
+.contact-section {
+    padding: 5rem 5%;
+}
+
+/* Footer padding */
+footer {
+    padding: 2.5rem 5%;
+}
+```
+
+### Container Widths
+
+Different content types use different max-widths for optimal readability:
+
+```css
+/* Hero container */
+#hero .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Contact form wrapper */
+.contact-wrapper {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+/* Project intro */
+.proyecto-intro {
+    max-width: 680px;
+    margin: 0 auto 3.5rem;
+}
+
+/* Render grid */
+.render-grid--two {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+}
+
+/* Footer */
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+```
+
+## How to Adjust Spacing
+
+<Steps>
+  <Step title="Identify the section to modify">
+    Determine which component or section you want to adjust. Use browser DevTools to inspect the element and find its CSS class.
+  </Step>
+  
+  <Step title="Locate the CSS rule">
+    Open `style.css` and search for the class name. Note the current padding or margin values.
+  </Step>
+  
+  <Step title="Modify the values">
+    Adjust the spacing values. The current system uses `rem` units (1rem = 16px by default) and percentage for horizontal padding.
+    
+    **Example - Increase section padding:**
+    ```css
+    /* Before */
+    .proyecto-seccion {
+        padding: 5rem 5%;
+    }
+    
+    /* After - More spacious */
+    .proyecto-seccion {
+        padding: 7rem 8%;
+    }
+    ```
+  </Step>
+  
+  <Step title="Test responsively">
+    Check your changes on different screen sizes to ensure they work well on mobile, tablet, and desktop.
+  </Step>
+</Steps>
+
+<Note>
+  The site uses a 5% horizontal padding on most sections. This creates consistent gutters that scale with viewport width. You can increase this to 8-10% for a more contained layout.
+</Note>
+
+## Header Height
+
+The header has a fixed height and sticky positioning:
+
+```css
+header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-principal);
+    height: 10vh;
+    border-bottom: 1px solid #e0e0e0;
+}
+```
+
+### Adjusting Header Height
+
+<Steps>
+  <Step title="Modify the header height">
+    Change the `height` property in the `header` rule (around line 67):
+    
+    ```css
+    header {
+        height: 80px;  /* Fixed height instead of 10vh */
+        padding: 1.5rem 5%;
+    }
+    ```
+  </Step>
+  
+  <Step title="Update mobile menu position">
+    If you change the header height, update the mobile menu's top position (around line 1042):
+    
+    ```css
+    @media (max-width: 768px) {
+        header nav {
+            top: 80px;  /* Match your new header height */
+        }
+    }
+    ```
+  </Step>
+</Steps>
+
+<Warning>
+  The header uses `position: sticky` with `z-index: 1000`. If you experience layering issues, ensure this z-index is higher than other positioned elements.
+</Warning>
+
+## Grid Layouts
+
+### Landing Grid
+
+The homepage uses a two-column grid:
+
+```css
+.landing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid #e0e0e0;
+}
+
+.landing-card {
+    padding: 4rem 5%;
+    gap: 1rem;
+}
+```
+
+**To make it three columns:**
+
+```css
+.landing-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.landing-card {
+    padding: 3rem 4%;  /* Reduce padding for narrower cards */
+}
+```
+
+### Gastro Grid
+
+The gastronomy page uses a three-column card grid:
+
+```css
+.gastro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+```
+
+**To adjust the gap:**
+
+```css
+.gastro-grid {
+    gap: 3rem;  /* More spacing between cards */
+}
+```
+
+### Ocio (Leisure) Blocks
+
+Two-column layout for image and text:
+
+```css
+.ocio-bloque {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+}
+
+.ocio-bloque__texto {
+    padding: 5rem;
+    gap: 1.5rem;
+}
+```
+
+## Responsive Breakpoints
+
+The site uses three main breakpoints:
+
+### Mobile (576px and below)
+
+```css
+@media (max-width: 576px) {
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .page-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .form-row--two {
+        grid-template-columns: 1fr;  /* Stack form fields */
+    }
+    
+    .proyecto-seccion {
+        padding: 3rem 5%;  /* Reduced padding */
+    }
+}
+```
+
+### Tablet (768px and below)
+
+```css
+@media (max-width: 768px) {
+    /* Show hamburger menu */
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Stack landing cards */
+    .landing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Stack render grid */
+    .render-grid--two {
+        grid-template-columns: 1fr;
+    }
+}
+```
+
+### Desktop Small (992px and below)
+
+```css
+@media (max-width: 992px) {
+    /* Stack ocio blocks */
+    .ocio-bloque {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+    
+    .ocio-bloque__texto {
+        padding: 3rem 5%;
+    }
+    
+    /* Single column gastro grid */
+    .gastro-grid {
+        grid-template-columns: 1fr;
+    }
+}
+```
+
+## Customizing Breakpoints
+
+<Steps>
+  <Step title="Identify current breakpoints">
+    Review the media query sections at the bottom of `style.css` (starting around line 955).
+  </Step>
+  
+  <Step title="Add a new breakpoint">
+    Create a new media query for your custom breakpoint:
+    
+    ```css
+    @media (max-width: 1200px) {
+        .your-class {
+            /* Your adjustments */
+        }
+    }
+    ```
+  </Step>
+  
+  <Step title="Adjust existing breakpoints">
+    Modify the pixel values in existing media queries:
+    
+    ```css
+    /* Change from 768px to 900px */
+    @media (max-width: 900px) {
+        .landing-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+  When adding custom breakpoints, work from largest to smallest. Place them in your CSS in descending order (1200px, 992px, 768px, 576px) for better organization.
+</Tip>
+
+## Hero Section Height
+
+The main hero section on the homepage:
+
+```css
+#hero {
+    height: 85vh;
+    padding-bottom: 8vh;
+}
+```
+
+**To make it fullscreen:**
+
+```css
+#hero {
+    height: 100vh;
+    padding-bottom: 10vh;
+}
+```
+
+**To make it shorter:**
+
+```css
+#hero {
+    height: 60vh;
+    padding-bottom: 5vh;
+}
+```
+
+## Gap & Spacing in Flex/Grid
+
+Many components use `gap` for consistent spacing:
+
+```css
+/* Header navigation gap */
+header {
+    gap: 1rem;
+}
+
+/* Landing card content gap */
+.landing-card {
+    gap: 1rem;
+}
+
+/* Ocio text content gap */
+.ocio-bloque__texto {
+    gap: 1.5rem;
+}
+
+/* Gastro card content gap */
+.gastro-card {
+    gap: 1.5rem;
+}
+
+/* Form group gap */
+.form-group {
+    gap: 0.5rem;
+}
+```
+
+**To create more breathing room:**
+
+```css
+.landing-card {
+    gap: 2rem;  /* Increased from 1rem */
+}
+
+.gastro-card {
+    gap: 2.5rem;  /* Increased from 1.5rem */
+}
+```
+
+## Margin Adjustments
+
+<Steps>
+  <Step title="Identify spacing issues">
+    Use browser DevTools to inspect elements and identify margin values that need adjustment.
+  </Step>
+  
+  <Step title="Adjust bottom margins">
+    Many sections use bottom margins for separation:
+    
+    ```css
+    /* Project intro margin */
+    .proyecto-intro {
+        margin: 0 auto 3.5rem;  /* 3.5rem bottom margin */
+    }
+    
+    /* Increase spacing */
+    .proyecto-intro {
+        margin: 0 auto 5rem;
+    }
+    ```
+  </Step>
+  
+  <Step title="Test visual rhythm">
+    After adjusting margins, scroll through pages to ensure visual rhythm feels consistent.
+  </Step>
+</Steps>
+
+## Practical Examples
+
+### Example 1: Create a More Compact Layout
+
+```css
+/* Reduce section padding */
+.proyecto-seccion {
+    padding: 3rem 5%;  /* Down from 5rem */
+}
+
+/* Reduce hero height */
+#hero {
+    height: 70vh;  /* Down from 85vh */
+}
+
+/* Tighten card padding */
+.landing-card {
+    padding: 3rem 5%;  /* Down from 4rem */
+}
+```
+
+### Example 2: Create a More Spacious Layout
+
+```css
+/* Increase section padding */
+.proyecto-seccion {
+    padding: 8rem 10%;  /* Up from 5rem 5% */
+}
+
+/* Increase container gaps */
+.gastro-grid {
+    gap: 3rem;  /* Up from 2rem */
+}
+
+/* Add more breathing room */
+.landing-card {
+    gap: 2rem;  /* Up from 1rem */
+}
+```
+
+### Example 3: Wider Content Area
+
+```css
+/* Increase max-widths */
+.render-grid--two {
+    max-width: 1400px;  /* Up from 1200px */
+}
+
+.gastro-grid {
+    max-width: 1400px;  /* Up from 1200px */
+}
+
+.footer-inner {
+    max-width: 1400px;  /* Up from 1200px */
+}
+```
+
+<Note>
+  When increasing max-widths beyond 1200px, consider increasing the gap values in grid layouts to prevent content from feeling too spread out.
+</Note>
+
+## Testing Your Changes
+
+After modifying layout values:
+
+1. **Test on multiple screen sizes** - Use browser DevTools responsive mode
+2. **Check all pages** - Ensure changes work across index, gastro, ocio, proyecto, and contact pages
+3. **Verify mobile navigation** - Ensure the hamburger menu still works correctly
+4. **Check content overflow** - Make sure text and images don't overflow their containers
+5. **Test grid behavior** - Verify grid layouts stack properly on smaller screens
+
+<Warning>
+  Always test layout changes on actual mobile devices when possible. Browser DevTools are helpful but don't always perfectly replicate real device behavior.
+</Warning>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Customize Colors" icon="palette" href="/customization/colors">
+    Learn how to change the color scheme
+  </Card>
+  <Card title="Customize Fonts" icon="font" href="/customization/fonts">
+    Change typography and fonts
+  </Card>
+</CardGroup>

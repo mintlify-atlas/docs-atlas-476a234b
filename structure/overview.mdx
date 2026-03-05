@@ -1,0 +1,179 @@
+---
+title: Project Structure Overview
+description: Understanding the file organization and architecture of Proyecto Neptuno
+---
+
+Proyecto Neptuno follows a simple, flat file structure designed for easy maintenance and deployment. All files are organized in a single directory with clear naming conventions.
+
+## Directory Structure
+
+The project consists of 5 HTML pages, 1 stylesheet, and an images folder:
+
+```
+source/
+├── index.html          # Homepage with hero section
+├── ocio.html           # Entertainment and leisure page
+├── gastro.html         # Gastronomy page
+├── proyecto.html       # Project details page
+├── contact.html        # Contact form page
+├── style.css           # Single stylesheet for entire site
+└── img/                # Images folder
+    ├── logo.png
+    ├── logo.jpg
+    ├── ccneptuno.webp  # Hero background
+    ├── Secuencia-01.webp through Secuencia-09.webp
+    ├── cine-megarama.jpg
+    └── cine-megarama-interior.jpg
+```
+
+## File Organization
+
+<CardGroup cols={2}>
+  <Card title="HTML Pages" icon="file-code">
+    5 semantic HTML5 pages with consistent structure across all pages
+  </Card>
+  <Card title="Stylesheet" icon="paintbrush">
+    Single CSS file (`style.css`) managing all styles with CSS custom properties
+  </Card>
+  <Card title="Images" icon="image">
+    Dedicated `img/` folder containing WebP and JPG formats for optimal performance
+  </Card>
+  <Card title="No Build Process" icon="check">
+    Pure HTML/CSS project with no compilation or bundling required
+  </Card>
+</CardGroup>
+
+## File Purposes
+
+### HTML Pages
+
+<Tabs>
+  <Tab title="index.html">
+    **Homepage** - Landing page with hero section and navigation cards to main content sections.
+    
+    Features:
+    - Full-screen hero section with background image
+    - Call-to-action buttons
+    - Landing grid with links to Ocio and Gastro pages
+  </Tab>
+  
+  <Tab title="ocio.html">
+    **Entertainment Page** - Showcases leisure and entertainment offerings.
+    
+    Features:
+    - Page hero header
+    - Two content blocks (Cinema and Arcade)
+    - Image galleries with overlay detail images
+    - Feature lists for each section
+  </Tab>
+  
+  <Tab title="gastro.html">
+    **Gastronomy Page** - Details food and dining options.
+    
+    Features:
+    - Page hero header
+    - Introduction section
+    - Three-column grid of gastro categories
+    - Numbered cards with decorative elements
+  </Tab>
+  
+  <Tab title="proyecto.html">
+    **Project Page** - Explains the renovation project vision.
+    
+    Features:
+    - Multiple project sections
+    - Render image galleries
+    - Before/after process visualization
+    - Full-width and grid image layouts
+  </Tab>
+  
+  <Tab title="contact.html">
+    **Contact Page** - Interactive contact form with profile tabs.
+    
+    Features:
+    - Dynamic form with radio button tabs
+    - Profile-specific fields (Investor, Brand, Press, Citizen)
+    - Pure CSS tab switching (no JavaScript)
+    - Form validation
+  </Tab>
+</Tabs>
+
+### Stylesheet Architecture
+
+The `style.css` file is organized into logical sections:
+
+```css
+/* CSS Organization */
+1. Google Fonts imports
+2. CSS Custom Properties (:root)
+3. Global reset and base styles
+4. Header and navigation
+5. Homepage sections (hero, landing grid)
+6. Page hero (interior pages)
+7. Ocio page styles
+8. Proyecto page styles
+9. Gastro page styles
+10. Contact form styles
+11. Footer
+12. Responsive media queries
+```
+
+<Note>
+  The entire project uses CSS custom properties for consistent theming:
+  - `--color-primario`: #8B1D1D (Burgundy)
+  - `--color-secundario`: #B89D64 (Champagne Gold)
+  - `--bg-principal`: #FFFFFF (White)
+  - `--bg-secundario`: #F8F9FA (Light Gray)
+</Note>
+
+## Images Folder
+
+The `img/` directory contains:
+
+- **Logo files**: `logo.png`, `logo.jpg`
+- **Hero background**: `ccneptuno.webp`
+- **Project renders**: `Secuencia-01.webp` through `Secuencia-09.webp`
+- **Entertainment photos**: `cine-megarama.jpg`, `cine-megarama-interior.jpg`
+
+<Note type="tip">
+  Images use WebP format for better compression and performance, with JPG fallbacks where needed.
+</Note>
+
+## Design Philosophy
+
+### Simple and Maintainable
+
+The flat structure makes it easy to:
+- Locate any file quickly
+- Update content without complex navigation
+- Deploy to any static hosting service
+- Understand the entire codebase at a glance
+
+### No Dependencies
+
+Proyecto Neptuno has:
+- **No JavaScript** (except Google Fonts CDN)
+- **No build tools** required
+- **No package managers**
+- **No frameworks**
+
+This makes the project lightweight, fast, and easy to maintain.
+
+### Consistent Patterns
+
+All pages share:
+- Identical `<header>` structure
+- Same navigation menu
+- Consistent `<footer>` markup
+- Unified CSS architecture
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Pages Documentation" icon="file" href="/structure/pages">
+    Explore each HTML page in detail
+  </Card>
+  <Card title="Navigation Structure" icon="bars" href="/structure/navigation">
+    Learn how the navigation system works
+  </Card>
+</CardGroup>

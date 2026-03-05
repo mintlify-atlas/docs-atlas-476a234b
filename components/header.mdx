@@ -1,0 +1,182 @@
+---
+title: Header Component
+description: Sticky header with logo, navigation, and responsive hamburger menu
+---
+
+The header component appears on all pages of Proyecto Neptuno. It features a sticky position, logo, navigation menu, and a hamburger menu for mobile devices.
+
+## Structure
+
+The header is built with three main parts:
+- Logo container
+- Hamburger menu toggle (hidden checkbox)
+- Navigation menu
+
+## HTML Code
+
+Extracted from `index.html` (lines 10-31):
+
+```html
+<header>
+    <div>
+        <a href="./index.html"><img src="./img/logo.png" alt="Logo CC Neptuno"></a>
+    </div>
+
+    <input type="checkbox" id="btn-menu">
+    <label for="btn-menu" class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+    </label>
+
+    <nav>
+        <ul>
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./ocio.html">Ocio</a></li>
+            <li><a href="./gastro.html">Gastronomía</a></li>
+            <li><a href="./proyecto.html">El Proyecto</a></li>
+            <li><a href="./contact.html">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+## CSS Styling
+
+### Desktop Header
+
+From `style.css` (lines 56-84):
+
+```css
+header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-principal);
+    height: 10vh;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header nav {
+    width: 70%;
+}
+
+header ul { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header li {
+    list-style: none;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+```
+
+### Hamburger Menu
+
+From `style.css` (lines 86-109):
+
+```css
+/* Hidden checkbox for toggle */
+#btn-menu {
+    display: none;
+}
+
+/* Hamburger icon (hidden on desktop) */
+.hamburger {
+    display: none;
+    width: 30px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1001;
+}
+
+/* Three lines of hamburger */
+.hamburger .line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+```
+
+## Responsive Behavior
+
+<Tabs>
+  <Tab title="Mobile (≤768px)">
+    From `style.css` (lines 1034-1060):
+
+    ```css
+    @media (max-width: 768px) {
+        /* Show hamburger */
+        .hamburger {
+            display: flex;
+        }
+        
+        /* Hide menu and prepare as slide-in panel */
+        header nav {
+            position: fixed;
+            top: 10vh;
+            left: -100%;
+            width: 100%;
+            height: 45vh;
+            background-color: var(--bg-secundario);
+            transition: all 0.4s ease;
+            display: block;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* Vertical menu list */
+        header ul {
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+        }
+        
+        /* When checked: menu slides in */
+        #btn-menu:checked ~ nav {
+            left: 0;
+        }
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Desktop (>768px)">
+    - Horizontal navigation menu
+    - No hamburger icon
+    - Sticky positioning at top
+    - 10vh height with border-bottom
+  </Tab>
+</Tabs>
+
+## Key Features
+
+<Card title="Sticky Positioning" icon="anchor">
+  The header uses `position: sticky` with `top: 0` and `z-index: 1000` to stay fixed at the top of the viewport while scrolling.
+</Card>
+
+<Card title="Pure CSS Toggle" icon="toggle-on">
+  The mobile menu uses a hidden checkbox (`#btn-menu`) and the `:checked` pseudo-class to toggle the navigation panel without JavaScript.
+</Card>
+
+<Card title="Smooth Transitions" icon="wand-magic-sparkles">
+  Navigation slides in from the left with a 0.4s ease transition on mobile devices.
+</Card>
+
+<Note>
+  The hamburger menu implementation uses the **checkbox hack** technique - a pure CSS solution that eliminates the need for JavaScript for simple toggle interactions.
+</Note>

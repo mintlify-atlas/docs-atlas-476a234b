@@ -1,0 +1,216 @@
+---
+title: 'Customizing Colors'
+description: 'Learn how to customize the color scheme of Proyecto Neptuno'
+icon: 'palette'
+---
+
+## Overview
+
+Proyecto Neptuno uses CSS custom properties (CSS variables) to define its color palette. This makes it easy to customize the entire color scheme by modifying values in a single location.
+
+## Color System
+
+The color scheme is organized into three main categories:
+
+### Primary Colors
+The brand colors that define the visual identity:
+
+```css
+--color-primario: #8B1D1D;    /* Granate Corporativo (el arco) */
+--color-primario-claro: #A32A2A; /* Para hover y acentos secundarios */
+--color-secundario: #B89D64;  /* Dorado Champán (otros acentos) */
+--color-secundario-claro: #E5D1A4; /* Para hover y acentos secundarios */
+```
+
+### Background Colors
+Colors used for surfaces and layout backgrounds:
+
+```css
+--bg-principal: #FFFFFF;      /* Blanco Puro (limpieza visual) */
+--bg-secundario: #F8F9FA;     /* Gris Humo (para separar secciones) */
+--bg-footer: #1A1A1A;         /* Negro Carbón (cierre sólido) */
+```
+
+### Text Colors
+Colors for typography across different contexts:
+
+```css
+--texto-oscuro: #1A1A1A;      /* Títulos y párrafos importantes */
+--texto-claro: #F5F5F5;       /* Texto sobre fondos oscuros (footer) */
+--texto-muted: #6C757D;       /* Gris para detalles menos importantes */
+```
+
+## How to Change Colors
+
+<Steps>
+  <Step title="Locate the style.css file">
+    Open `~/workspace/source/style.css` in your code editor.
+  </Step>
+  
+  <Step title="Find the :root section">
+    Scroll to the top of the file and locate the `:root` selector (around line 8). This is where all color variables are defined.
+  </Step>
+  
+  <Step title="Modify the color values">
+    Replace the hex color values with your desired colors. Make sure to keep the variable names the same.
+    
+    ```css
+    :root {
+        /* Your new primary color */
+        --color-primario: #2E5090;    /* Navy Blue */
+        --color-primario-claro: #4A6FA5;
+        
+        /* Your new secondary color */
+        --color-secundario: #F4A261;  /* Warm Orange */
+        --color-secundario-claro: #F6B98C;
+    }
+    ```
+  </Step>
+  
+  <Step title="Save and refresh">
+    Save the file and refresh your browser to see the changes applied across the entire site.
+  </Step>
+</Steps>
+
+<Note>
+  All color variables use the `--` prefix followed by a descriptive name. Changing these values will automatically update all components that use them.
+</Note>
+
+## Example Color Schemes
+
+Here are some pre-designed color schemes you can use:
+
+### Ocean Blue Theme
+
+```css
+:root {
+    --color-primario: #006994;
+    --color-primario-claro: #0088BB;
+    --color-secundario: #47B5FF;
+    --color-secundario-claro: #84D2FF;
+    
+    --bg-principal: #FFFFFF;
+    --bg-secundario: #F0F8FF;
+    --bg-footer: #002B3D;
+    
+    --texto-oscuro: #1A1A1A;
+    --texto-claro: #F5F5F5;
+    --texto-muted: #6C757D;
+}
+```
+
+### Forest Green Theme
+
+```css
+:root {
+    --color-primario: #2D5016;
+    --color-primario-claro: #3D6A21;
+    --color-secundario: #A0C334;
+    --color-secundario-claro: #C5E86C;
+    
+    --bg-principal: #FFFFFF;
+    --bg-secundario: #F4F7F0;
+    --bg-footer: #1A2912;
+    
+    --texto-oscuro: #1A1A1A;
+    --texto-claro: #F5F5F5;
+    --texto-muted: #6C757D;
+}
+```
+
+### Sunset Purple Theme
+
+```css
+:root {
+    --color-primario: #6B2C91;
+    --color-primario-claro: #8442A8;
+    --color-secundario: #E76F51;
+    --color-secundario-claro: #F4A590;
+    
+    --bg-principal: #FFFFFF;
+    --bg-secundario: #FAF7FC;
+    --bg-footer: #2B1138;
+    
+    --texto-oscuro: #1A1A1A;
+    --texto-claro: #F5F5F5;
+    --texto-muted: #6C757D;
+}
+```
+
+## Step-by-Step: Changing Brand Colors
+
+Let's walk through a complete example of rebranding with a new color scheme:
+
+<Steps>
+  <Step title="Choose your brand colors">
+    Select a primary color (your main brand color) and a secondary/accent color. You can use tools like [Adobe Color](https://color.adobe.com/) or [Coolors](https://coolors.co/) to help pick complementary colors.
+  </Step>
+  
+  <Step title="Generate color variations">
+    Create lighter variations of your colors for hover states and accents. A good rule of thumb is to increase the lightness by 10-15% for the `claro` variants.
+  </Step>
+  
+  <Step title="Update the CSS variables">
+    Replace the values in `style.css`:
+    
+    **Before:**
+    ```css
+    --color-primario: #8B1D1D;
+    --color-primario-claro: #A32A2A;
+    ```
+    
+    **After:**
+    ```css
+    --color-primario: #FF6B35;  /* Your new primary color */
+    --color-primario-claro: #FF8C61;  /* Lighter variant */
+    ```
+  </Step>
+  
+  <Step title="Test across pages">
+    Check different pages to ensure your colors work well:
+    - Buttons and CTAs (`.btn-primary`)
+    - Navigation and headers
+    - Cards and sections (`.landing-card`, `.gastro-card`)
+    - Form elements and focus states
+  </Step>
+  
+  <Step title="Adjust if needed">
+    Fine-tune your colors based on readability and contrast. Ensure text remains legible on all backgrounds.
+  </Step>
+</Steps>
+
+<Warning>
+  When changing colors, always consider accessibility. Ensure sufficient contrast between text and background colors (minimum 4.5:1 ratio for normal text). Use tools like [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) to verify.
+</Warning>
+
+## Where Colors Are Used
+
+Understanding where each color variable is applied helps you make informed customization decisions:
+
+| Variable | Usage |
+|----------|-------|
+| `--color-primario` | Primary buttons, borders, accents, bullet points |
+| `--color-primario-claro` | Button hover states, link hover |
+| `--color-secundario` | Labels, secondary accents, decorative elements |
+| `--color-secundario-claro` | Hero subtitle, secondary button hover |
+| `--bg-principal` | Main page background, cards |
+| `--bg-secundario` | Alternating sections, form backgrounds |
+| `--bg-footer` | Footer background |
+| `--texto-oscuro` | Headings, body text |
+| `--texto-claro` | Text on dark backgrounds |
+| `--texto-muted` | Supporting text, captions |
+
+<Tip>
+  Start by changing just the primary and secondary colors first. Test thoroughly before modifying background and text colors, as these have a broader impact on readability.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Customize Fonts" icon="font" href="/customization/fonts">
+    Learn how to change typography and fonts
+  </Card>
+  <Card title="Customize Layout" icon="table-columns" href="/customization/layout">
+    Adjust spacing, padding, and responsive breakpoints
+  </Card>
+</CardGroup>

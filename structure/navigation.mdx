@@ -1,0 +1,470 @@
+---
+title: Navigation Structure
+description: How the header navigation and responsive menu system work
+---
+
+Proyecto Neptuno features a consistent navigation pattern across all pages, with a responsive hamburger menu for mobile devices. The entire system is built with pure HTML and CSS — no JavaScript required.
+
+## Header Structure
+
+The header is identical across all 5 pages, ensuring consistent navigation:
+
+```html
+<header>
+    <div>
+        <a href="./index.html"><img src="./img/logo.png" alt="Logo CC Neptuno"></a>
+    </div>
+
+    <input type="checkbox" id="btn-menu">
+    <label for="btn-menu" class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+    </label>
+
+    <nav>
+        <ul>
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./ocio.html">Ocio</a></li>
+            <li><a href="./gastro.html">Gastronomía</a></li>
+            <li><a href="./proyecto.html">El Proyecto</a></li>
+            <li><a href="./contact.html">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+## Header Components
+
+<CardGroup cols={3}>
+  <Card title="Logo" icon="image">
+    Clickable logo linking back to homepage
+  </Card>
+  <Card title="Navigation Menu" icon="bars">
+    5 main navigation links to all pages
+  </Card>
+  <Card title="Hamburger Toggle" icon="bars">
+    Mobile menu trigger (hidden on desktop)
+  </Card>
+</CardGroup>
+
+## CSS Implementation
+
+### Desktop Navigation
+
+On desktop screens, the header uses flexbox for horizontal layout:
+
+```css
+header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-principal);
+    height: 10vh;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header nav {
+    width: 70%;
+}
+
+header ul { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header li {
+    list-style: none;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+```
+
+**Key Features:**
+- `position: sticky` keeps header visible on scroll
+- `z-index: 1000` ensures it stays above content
+- Flexbox distributes links evenly
+- Bottom border provides subtle separation
+
+### Hamburger Menu (Mobile)
+
+The hamburger menu uses a **checkbox hack** for CSS-only interaction:
+
+<Tabs>
+  <Tab title="HTML Structure">
+    ```html
+    <!-- Hidden checkbox controls menu state -->
+    <input type="checkbox" id="btn-menu">
+    
+    <!-- Label acts as the clickable hamburger icon -->
+    <label for="btn-menu" class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+    </label>
+    
+    <!-- Navigation menu (slides in when checkbox is checked) -->
+    <nav>
+        <ul>
+            <li><a href="./index.html">Inicio</a></li>
+            <!-- More links -->
+        </ul>
+    </nav>
+    ```
+  </Tab>
+  
+  <Tab title="CSS - Checkbox">
+    ```css
+    /* Always hide the checkbox */
+    #btn-menu {
+        display: none;
+    }
+    ```
+    
+    The checkbox is never visible but controls the menu state through CSS.
+  </Tab>
+  
+  <Tab title="CSS - Hamburger Icon">
+    ```css
+    /* Hide hamburger on desktop */
+    .hamburger {
+        display: none;
+        width: 30px;
+        height: 20px;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 1001;
+    }
+
+    /* Draw the 3 lines */
+    .hamburger .line {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #000;
+        border-radius: 3px;
+        transition: all 0.3s;
+    }
+    ```
+    
+    The hamburger is hidden on desktop and only appears on mobile.
+  </Tab>
+  
+  <Tab title="CSS - Mobile Menu">
+    ```css
+    @media (max-width: 768px) {
+        /* Show hamburger on mobile */
+        .hamburger {
+            display: flex;
+        }
+        
+        /* Position menu off-screen */
+        header nav {
+            position: fixed;
+            top: 10vh;
+            left: -100%; /* Hidden to the left */
+            width: 100%;
+            height: 45vh;
+            background-color: var(--bg-secundario);
+            transition: all 0.4s ease;
+            display: block;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* Vertical link layout */
+        header ul {
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+        }
+        
+        /* Slide menu in when checkbox is checked */
+        #btn-menu:checked ~ nav {
+            left: 0;
+        }
+    }
+    ```
+    
+    When the checkbox is checked (by clicking the label), the `~` sibling selector reveals the menu.
+  </Tab>
+</Tabs>
+
+## How the Checkbox Hack Works
+
+<Note type="info">
+  This technique relies on the CSS `:checked` pseudo-class and sibling selectors (`~`).
+</Note>
+
+### The Mechanism
+
+1. **Checkbox**: Hidden `<input type="checkbox">` maintains state
+2. **Label**: Visible `<label>` triggers checkbox when clicked
+3. **Navigation**: Sibling `<nav>` element responds to checkbox state
+4. **CSS Selector**: `#btn-menu:checked ~ nav` selects nav when checkbox is checked
+
+```css
+/* Default: Menu hidden */
+header nav {
+    left: -100%;
+}
+
+/* When checkbox is checked: Menu visible */
+#btn-menu:checked ~ nav {
+    left: 0;
+}
+```
+
+<CodeGroup>
+```html DOM Structure
+<header>
+    <!-- 1. Hidden checkbox -->
+    <input type="checkbox" id="btn-menu">
+    
+    <!-- 2. Clickable label -->
+    <label for="btn-menu" class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+    </label>
+    
+    <!-- 3. Navigation (sibling of checkbox) -->
+    <nav>
+        <!-- Menu items -->
+    </nav>
+</header>
+```
+
+```css CSS Logic
+/* Step 1: Hide checkbox always */
+#btn-menu { display: none; }
+
+/* Step 2: Menu starts off-screen */
+header nav { left: -100%; }
+
+/* Step 3: When checked, slide in */
+#btn-menu:checked ~ nav { left: 0; }
+```
+</CodeGroup>
+
+## Responsive Breakpoints
+
+The navigation adapts at different screen widths:
+
+<Tabs>
+  <Tab title="Desktop (> 992px)">
+    ```css
+    /* Default desktop styles */
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    header nav {
+        width: 70%;
+        position: static;
+    }
+    
+    header ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .hamburger {
+        display: none;
+    }
+    ```
+    
+    **Features:**
+    - Full horizontal menu visible
+    - Hamburger icon hidden
+    - Links evenly distributed
+  </Tab>
+  
+  <Tab title="Tablet (768px - 992px)">
+    ```css
+    @media (max-width: 768px) {
+        .hamburger {
+            display: flex; /* Show hamburger */
+        }
+        
+        header nav {
+            position: fixed;
+            top: 10vh;
+            left: -100%;
+            width: 100%;
+            height: 45vh;
+            transition: all 0.4s ease;
+        }
+        
+        header ul {
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        
+        #btn-menu:checked ~ nav {
+            left: 0;
+        }
+    }
+    ```
+    
+    **Features:**
+    - Hamburger menu activated
+    - Slide-in panel from left
+    - Vertical link stacking
+  </Tab>
+  
+  <Tab title="Mobile (< 576px)">
+    Mobile uses the same hamburger menu as tablet, with inherited styles from the 768px breakpoint.
+    
+    The menu height (`45vh`) ensures it doesn't cover the entire screen, maintaining context.
+  </Tab>
+</Tabs>
+
+## Footer Navigation
+
+A secondary navigation exists in the footer:
+
+```html
+<footer>
+    <div class="footer-inner">
+        <p class="footer-copy">2026 Proyecto Neptuno — Propuesta de renovación ficticia para Granada</p>
+        <nav class="footer-nav" aria-label="Navegación secundaria">
+            <a href="./index.html">Inicio</a>
+            <a href="./ocio.html">Ocio</a>
+            <a href="./gastro.html">Gastronomía</a>
+            <a href="./proyecto.html">El proyecto</a>
+            <a href="./contact.html">Contacto</a>
+        </nav>
+    </div>
+</footer>
+```
+
+### Footer Styles
+
+```css
+footer {
+    background-color: var(--bg-footer);
+    padding: 2.5rem 5%;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-nav a {
+    font-size: 0.8rem;
+    color: var(--texto-muted);
+    text-decoration: none;
+    transition: var(--transicion-suave);
+}
+
+.footer-nav a:hover {
+    color: var(--color-secundario);
+}
+```
+
+**Features:**
+- Dark background with light text
+- Horizontal link layout
+- Hover color transition
+- Accessible with `aria-label`
+
+## Design Patterns
+
+### Sticky Header
+
+The header uses `position: sticky` to remain visible during scroll:
+
+```css
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+```
+
+**Benefits:**
+- Always accessible navigation
+- No JavaScript scroll listeners needed
+- Better UX for long pages
+
+### Transition Effects
+
+Smooth animations enhance the menu experience:
+
+```css
+header nav {
+    transition: all 0.4s ease;
+}
+
+.hamburger .line {
+    transition: all 0.3s;
+}
+
+.footer-nav a {
+    transition: var(--transicion-suave); /* 0.3s ease */
+}
+```
+
+### Accessibility Considerations
+
+<CardGroup cols={2}>
+  <Card title="ARIA Labels" icon="tag">
+    Footer nav uses `aria-label="Navegación secundaria"` to distinguish from main nav
+  </Card>
+  <Card title="Alt Text" icon="image">
+    Logo image includes descriptive alt text: `"Logo CC Neptuno"`
+  </Card>
+  <Card title="Semantic HTML" icon="code">
+    Uses `<nav>` and `<header>` elements for proper document structure
+  </Card>
+  <Card title="Focus States" icon="circle">
+    Links maintain default focus indicators for keyboard navigation
+  </Card>
+</CardGroup>
+
+## Key Takeaways
+
+<Note type="success">
+  **No JavaScript Required**: The entire navigation system, including the mobile hamburger menu, works with pure HTML and CSS using the checkbox hack technique.
+</Note>
+
+- Header is consistent across all pages
+- Hamburger menu uses checkbox + label + sibling selector
+- Sticky positioning keeps nav accessible
+- Footer provides secondary navigation
+- Fully responsive with smooth transitions
+- Accessible with semantic HTML and ARIA labels
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Project Overview" icon="folder" href="/structure/overview">
+    Return to project structure overview
+  </Card>
+  <Card title="Pages Documentation" icon="file" href="/structure/pages">
+    Learn about individual page structures
+  </Card>
+</CardGroup>

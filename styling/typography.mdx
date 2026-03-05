@@ -1,0 +1,291 @@
+---
+title: 'Typography System'
+description: 'Font families, heading styles, and typography implementation'
+icon: 'font'
+---
+
+## Font Families
+
+Proyecto Neptuno uses two Google Fonts that complement each other:
+
+1. **Playfair Display** (Serif) - For elegant headings
+2. **Montserrat** (Sans-serif) - For body text and UI
+
+### Font Import
+
+Fonts are imported at the top of `style.css`:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+```
+
+<Info>
+This import includes all font weights (100-900) and italic variations for both families, loaded with `display=swap` for better performance.
+</Info>
+
+## Base Typography
+
+### Body Font
+
+Montserrat is set as the default font for the entire site:
+
+```css
+body {
+    font-family: 'Montserrat';
+}
+```
+
+This applies to all text unless specifically overridden.
+
+## Heading Styles
+
+<Tabs>
+  <Tab title="H1 - Display Headings">
+    ```css
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 800;
+    }
+    ```
+    
+    **H1** uses Playfair Display with extra bold weight (800) for maximum impact on hero sections and page titles.
+    
+    ### Hero H1 Example:
+    ```css
+    #hero h1 {
+        font-size: 6rem; 
+        color: var(--texto-claro);
+        margin: 2rem 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7); 
+        letter-spacing: 2px;
+        line-height: 1.2;
+    }
+    ```
+    
+    ### Page Hero H1:
+    ```css
+    .page-hero h1 {
+        font-size: 4.5rem;
+        color: var(--texto-oscuro);
+        line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+    ```
+  </Tab>
+  
+  <Tab title="H2 - Section Headings">
+    ```css
+    h2 {
+        font-weight: 500;
+    }
+    ```
+    
+    **H2** uses medium weight by default. Context-specific styles add Playfair Display where needed:
+    
+    ### Landing Card H2:
+    ```css
+    .landing-card h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--texto-oscuro);
+        line-height: 1.2;
+    }
+    ```
+    
+    ### Project Section H2:
+    ```css
+    .proyecto-intro h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--texto-oscuro);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+    ```
+    
+    ### Ocio Block H2:
+    ```css
+    .ocio-bloque__texto h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--texto-oscuro);
+        line-height: 1.1;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Typography Scale
+
+The project uses a consistent typography scale across components:
+
+| Element | Font Family | Size | Weight | Usage |
+|---------|------------|------|--------|-------|
+| Hero H1 | Playfair Display | 6rem | 800 | Landing hero |
+| Page H1 | Playfair Display | 4.5rem | 800 | Interior page titles |
+| Ocio H2 | Playfair Display | 2.8rem | 700 | Section headings |
+| Project H2 | Playfair Display | 2.2rem | 700 | Project sections |
+| Landing H2 | Playfair Display | 1.8rem | 700 | Landing cards |
+| Body Text | Montserrat | 0.9-1rem | 400 | Paragraphs |
+| Labels | Montserrat | 0.72-0.8rem | 700 | Uppercase labels |
+
+## Typography Examples
+
+### Hero Section Typography
+
+The landing page hero combines large display text with decorative subtitle:
+
+```css
+#hero h1 {
+    font-size: 6rem; 
+    color: var(--texto-claro);
+    margin: 2rem 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); 
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+#hero h2 {
+    color: var(--color-secundario-claro);
+    font-size: 1.1rem;
+    margin: 0 auto;
+    max-width: 60%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.6;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+```
+
+<Note>
+Text shadows enhance legibility on image backgrounds. Both headings use increased letter-spacing for elegance.
+</Note>
+
+### Label Typography Pattern
+
+Uppercase labels appear throughout the design:
+
+```css
+.landing-card__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-secundario);
+}
+
+.page-hero__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-secundario);
+    margin-bottom: 1rem;
+}
+```
+
+### Body Text Typography
+
+Body text uses Montserrat with comfortable line-height:
+
+```css
+.landing-card p {
+    font-size: 0.9rem;
+    color: var(--texto-muted);
+    line-height: 1.7;
+    max-width: 380px;
+}
+
+.page-hero p {
+    color: var(--texto-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 520px;
+}
+```
+
+## Responsive Typography
+
+Typography scales down on mobile devices:
+
+```css
+@media (max-width: 576px) {
+    #hero h1 {
+        font-size: 2.5rem;  /* Down from 6rem */
+    }
+    #hero h2 {
+        max-width: 90%;
+        font-size: 0.9rem;
+    }
+    .page-hero h1 {
+        font-size: 2.5rem;  /* Down from 4.5rem */
+    }
+}
+
+@media (max-width: 768px) {
+    .proyecto-intro h2 {
+        font-size: 1.7rem;  /* Down from 2.2rem */
+    }
+}
+
+@media (max-width: 992px) {
+    .ocio-bloque__texto h2 {
+        font-size: 2rem;    /* Down from 2.8rem */
+    }
+}
+```
+
+<Warning>
+Large display text must scale significantly on mobile to maintain readability and prevent awkward line breaks.
+</Warning>
+
+## Typography Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Playfair for Impact" icon="heading">
+    Use Playfair Display for H1 and prominent H2 headings that need elegance
+  </Card>
+  <Card title="Montserrat for UI" icon="text">
+    Use Montserrat for body text, labels, buttons, and all UI elements
+  </Card>
+  <Card title="Line Height Matters" icon="arrows-up-down">
+    Body text: 1.7-1.8, Headings: 1.0-1.2 for optimal readability
+  </Card>
+  <Card title="Letter Spacing" icon="arrows-left-right">
+    Add letter-spacing to uppercase labels (2-3px) for sophistication
+  </Card>
+</CardGroup>
+
+## Text Decorative Effects
+
+### Text Shadows
+
+Text shadows improve contrast on image backgrounds:
+
+```css
+#hero h1,
+#hero h2 {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+```
+
+### Transitions
+
+Smooth transitions on interactive text:
+
+```css
+.landing-card__cta {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    letter-spacing: 1px;
+    transition: var(--transicion-suave);
+}
+
+.landing-card:hover .landing-card__cta {
+    letter-spacing: 2px;  /* Expands on hover */
+}
+```

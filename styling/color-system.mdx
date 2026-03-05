@@ -1,0 +1,202 @@
+---
+title: 'Color System'
+description: 'Color palette and theming system using CSS custom properties'
+icon: 'palette'
+---
+
+## Overview
+
+Proyecto Neptuno uses a sophisticated color system based on CSS custom properties (variables) defined in the `:root` selector. This approach enables consistent theming and easy maintenance.
+
+## Primary Colors
+
+The primary color is **Granate Corporativo** (Corporate Garnet), reflecting the iconic arch of the building.
+
+```css
+:root {
+    --color-primario: #8B1D1D;           /* Granate Corporativo */
+    --color-primario-claro: #A32A2A;     /* Hover and secondary accents */
+}
+```
+
+<CardGroup cols={2}>
+  <Card title="Primary" icon="circle" color="#8B1D1D">
+    **#8B1D1D** - Main brand color used for buttons, accents, and borders
+  </Card>
+  <Card title="Primary Light" icon="circle" color="#A32A2A">
+    **#A32A2A** - Hover states and lighter accents
+  </Card>
+</CardGroup>
+
+## Secondary Colors
+
+The secondary color is **Dorado Champán** (Champagne Gold), used for decorative accents.
+
+```css
+:root {
+    --color-secundario: #B89D64;         /* Dorado Champán */
+    --color-secundario-claro: #E5D1A4;   /* Lighter variation */
+}
+```
+
+<CardGroup cols={2}>
+  <Card title="Secondary" icon="circle" color="#B89D64">
+    **#B89D64** - Labels, decorative elements, footer hover
+  </Card>
+  <Card title="Secondary Light" icon="circle" color="#E5D1A4">
+    **#E5D1A4** - Subtitle text on dark backgrounds
+  </Card>
+</CardGroup>
+
+## Background Colors
+
+Three background colors create visual hierarchy:
+
+```css
+:root {
+    --bg-principal: #FFFFFF;      /* Blanco Puro */
+    --bg-secundario: #F8F9FA;     /* Gris Humo */
+    --bg-footer: #1A1A1A;         /* Negro Carbón */
+}
+```
+
+<Accordion title="Background Usage Examples">
+
+**Principal (White)** - Main content areas:
+```css
+.proyecto-seccion {
+    background-color: var(--bg-principal);
+}
+```
+
+**Secondary (Smoke Gray)** - Alternating sections:
+```css
+.proyecto-seccion--dark {
+    background-color: var(--bg-secundario);
+}
+```
+
+**Footer (Charcoal Black)** - Site footer:
+```css
+footer {
+    background-color: var(--bg-footer);
+}
+```
+
+</Accordion>
+
+## Text Colors
+
+Three text color variables ensure proper contrast:
+
+```css
+:root {
+    --texto-oscuro: #1A1A1A;      /* Titles and important text */
+    --texto-claro: #F5F5F5;       /* Text on dark backgrounds */
+    --texto-muted: #6C757D;       /* Less important details */
+}
+```
+
+<Tabs>
+  <Tab title="Dark Text">
+    ```css
+    .page-hero h1 {
+        color: var(--texto-oscuro);
+    }
+    ```
+    Used for headings and body text on light backgrounds.
+  </Tab>
+  <Tab title="Light Text">
+    ```css
+    #hero h1 {
+        color: var(--texto-claro);
+    }
+    ```
+    Used for text on dark backgrounds like the hero section and footer.
+  </Tab>
+  <Tab title="Muted Text">
+    ```css
+    .landing-card p {
+        color: var(--texto-muted);
+    }
+    ```
+    Used for secondary information, captions, and less prominent text.
+  </Tab>
+</Tabs>
+
+## How to Use Colors
+
+### In Your CSS
+
+Always reference CSS variables instead of hardcoding hex values:
+
+```css
+/* ✅ Good - Uses CSS variable */
+.button {
+    background-color: var(--color-primario);
+    color: var(--texto-claro);
+}
+
+/* ❌ Bad - Hardcoded color */
+.button {
+    background-color: #8B1D1D;
+    color: #F5F5F5;
+}
+```
+
+### Real-World Example: Button Styles
+
+```css
+.btn-primary {
+    background-color: var(--color-primario);
+    color: var(--texto-claro);
+    border: 1px solid var(--color-primario);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primario-claro);
+    border-color: var(--color-primario-claro);
+    transform: translateY(-3px);
+}
+```
+
+<Note>
+This pattern makes it easy to change the entire color scheme by modifying just the `:root` variables.
+</Note>
+
+## Customizing the Color System
+
+To customize colors for your project:
+
+1. **Locate the `:root` selector** in `style.css` (around line 8)
+2. **Modify the CSS variables:**
+
+```css
+:root {
+    /* Change primary color */
+    --color-primario: #YOUR_COLOR;
+    --color-primario-claro: #YOUR_LIGHTER_SHADE;
+    
+    /* Change secondary color */
+    --color-secundario: #YOUR_ACCENT;
+    /* ... */
+}
+```
+
+3. **Save and refresh** - All components automatically update!
+
+<Info>
+No need to search and replace throughout the entire stylesheet. The power of CSS variables!
+</Info>
+
+## Color Accessibility
+
+The color system ensures WCAG AA contrast ratios:
+
+- **Dark text (#1A1A1A) on white** - Excellent contrast
+- **Light text (#F5F5F5) on footer (#1A1A1A)** - High contrast
+- **Primary color (#8B1D1D) with light text** - Sufficient contrast for buttons
+
+<Warning>
+When customizing colors, always test contrast ratios using tools like WebAIM's Contrast Checker to maintain accessibility.
+</Warning>

@@ -1,0 +1,182 @@
+---
+title: Introduction
+description: Learn about Proyecto Neptuno, a responsive HTML/CSS website for a shopping center renovation project in Granada, Spain
+---
+
+## Overview
+
+Proyecto Neptuno is a fully responsive HTML/CSS website showcasing a fictional renovation project for a shopping center in Granada, Spain. The project demonstrates modern web design techniques, clean semantic HTML, and advanced CSS layouts without relying on frameworks.
+
+<Info>
+  **Live Demo**: [https://melerodaw.github.io/CSS-responsive-project/](https://melerodaw.github.io/CSS-responsive-project/)
+</Info>
+
+## What is Proyecto Neptuno?
+
+This project presents a comprehensive website for "CC Neptuno" (Centro Comercial Neptuno), featuring:
+
+- **5 fully responsive pages**: Home, Leisure (Ocio), Gastronomy, Project Details, and Contact
+- **Mobile-first design** with hamburger menu navigation
+- **Semantic HTML5** structure with accessibility considerations
+- **Custom CSS** with CSS variables for theming
+- **Spanish language content** focused on cultural authenticity
+
+<CardGroup cols={2}>
+  <Card title="Home Page" icon="house">
+    Landing page with hero section and feature cards showcasing the shopping center's offerings
+  </Card>
+  <Card title="Leisure & Entertainment" icon="gamepad">
+    Details about cinema, arcade, and bowling facilities
+  </Card>
+  <Card title="Gastronomy" icon="utensils">
+    Showcase of restaurants, tapas bars, and dining options
+  </Card>
+  <Card title="Contact Form" icon="envelope">
+    Multi-step contact form with role-based fields
+  </Card>
+</CardGroup>
+
+## Target Audience
+
+This project is ideal for:
+
+- **Web development students** learning responsive design principles
+- **Frontend developers** studying CSS layout techniques (flexbox, grid, media queries)
+- **Designers** interested in Spanish cultural web projects
+- **Educators** looking for real-world HTML/CSS examples
+
+## Key Technologies
+
+### HTML5
+Semantic markup with proper document structure, accessibility attributes, and form validation.
+
+### CSS3
+Modern CSS features including:
+- CSS Custom Properties (variables) for theming
+- Flexbox and Grid layouts
+- Media queries for responsive breakpoints
+- Transitions and hover effects
+- Mobile-first responsive navigation
+
+### Google Fonts
+Typography using:
+- **Playfair Display** - Elegant serif for headings
+- **Montserrat** - Clean sans-serif for body text
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+```
+
+## Design System
+
+The project uses a cohesive color palette defined in CSS variables:
+
+```css
+:root {
+    /* Primary Colors */
+    --color-primario: #8B1D1D;           /* Corporate Garnet */
+    --color-primario-claro: #A32A2A;     /* Hover accents */
+    --color-secundario: #B89D64;         /* Champagne Gold */
+    --color-secundario-claro: #E5D1A4;   /* Secondary accents */
+    
+    /* Backgrounds */
+    --bg-principal: #FFFFFF;             /* Pure white */
+    --bg-secundario: #F8F9FA;            /* Smoke gray */
+    --bg-footer: #1A1A1A;                /* Carbon black */
+
+    /* Text Colors */
+    --texto-oscuro: #1A1A1A;             /* Dark text */
+    --texto-claro: #F5F5F5;              /* Light text */
+    --texto-muted: #6C757D;              /* Muted gray */
+}
+```
+
+## Project Structure
+
+The website follows a straightforward file organization:
+
+```
+source/
+├── index.html          # Home page
+├── ocio.html           # Leisure/entertainment page
+├── gastro.html         # Gastronomy page
+├── proyecto.html       # Project details page
+├── contact.html        # Contact form page
+├── style.css           # Main stylesheet (24KB)
+└── img/                # Image assets
+    ├── logo.png
+    ├── ccneptuno.webp
+    └── Secuencia-*.webp # Project images
+```
+
+<Note>
+  All pages share the same stylesheet and navigation structure, ensuring a consistent user experience across the site.
+</Note>
+
+## Key Features
+
+### Responsive Navigation
+The header uses a checkbox-based hamburger menu for mobile devices:
+
+```html
+<header>
+    <div>
+        <a href="./index.html"><img src="./img/logo.png" alt="Logo CC Neptuno"></a>
+    </div>
+
+    <input type="checkbox" id="btn-menu">
+    <label for="btn-menu" class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+    </label>
+
+    <nav>
+        <ul>
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./ocio.html">Ocio</a></li>
+            <li><a href="./gastro.html">Gastronomía</a></li>
+            <li><a href="./proyecto.html">El Proyecto</a></li>
+            <li><a href="./contact.html">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+### Sticky Header
+The navigation stays visible while scrolling:
+
+```css
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-principal);
+}
+```
+
+### Landing Card Grid
+The home page features an attractive card layout:
+
+```html
+<section class="landing-grid">
+    <a href="./ocio.html" class="landing-card">
+        <span class="landing-card__label">Cultura y ocio</span>
+        <h2>Cine, arcade y bolera</h2>
+        <p>Las mejores propuestas de entretenimiento de Granada...</p>
+        <span class="landing-card__cta">Descubrir →</span>
+    </a>
+    <!-- More cards... -->
+</section>
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Get the project running locally in minutes
+  </Card>
+  <Card title="Deployment" icon="cloud" href="/deployment">
+    Learn how to deploy your own version
+  </Card>
+</CardGroup>

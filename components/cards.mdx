@@ -1,0 +1,322 @@
+---
+title: Card Components
+description: Landing cards and gastro cards with hover effects and visual hierarchy
+---
+
+Proyecto Neptuno uses two distinct card styles: **landing cards** for the homepage and **gastro cards** for the gastronomy page.
+
+## Landing Cards
+
+These cards appear on `index.html` in a two-column grid layout.
+
+### HTML Structure
+
+From `index.html` (lines 45-59):
+
+```html
+<section class="landing-grid">
+    <a href="./ocio.html" class="landing-card">
+        <span class="landing-card__label">Cultura y ocio</span>
+        <h2>Cine, arcade y bolera</h2>
+        <p>Las mejores propuestas de entretenimiento de Granada bajo un mismo techo renovado.</p>
+        <span class="landing-card__cta">Descubrir →</span>
+    </a>
+
+    <a href="./gastro.html" class="landing-card">
+        <span class="landing-card__label">Gastronomía</span>
+        <h2>Tapas, restaurantes y más</h2>
+        <p>Una oferta gastronómica pensada para todos los momentos del día en el bulevar interior.</p>
+        <span class="landing-card__cta">Descubrir →</span>
+    </a>
+</section>
+```
+
+### CSS Styling
+
+From `style.css` (lines 164-223):
+
+```css
+.landing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid #e0e0e0;
+}
+
+.landing-card {
+    padding: 4rem 5%;
+    background-color: var(--bg-secundario);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-right: 1px solid #e0e0e0;
+    transition: var(--transicion-suave);
+}
+
+.landing-card:last-child {
+    border-right: none;
+}
+
+.landing-card:hover {
+    background-color: #f0f0f0;
+}
+
+.landing-card__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-secundario);
+}
+
+.landing-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--texto-oscuro);
+    line-height: 1.2;
+}
+
+.landing-card p {
+    font-size: 0.9rem;
+    color: var(--texto-muted);
+    line-height: 1.7;
+    max-width: 380px;
+}
+
+.landing-card__cta {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+    transition: var(--transicion-suave);
+}
+
+.landing-card:hover .landing-card__cta {
+    letter-spacing: 2px;
+}
+```
+
+### Responsive Behavior
+
+From `style.css` (lines 1062-1073):
+
+```css
+@media (max-width: 768px) {
+    .landing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .landing-card {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .landing-card:last-child {
+        border-bottom: none;
+    }
+}
+```
+
+## Gastro Cards
+
+These cards appear on `gastro.html` in a three-column grid with numbered decoration.
+
+### HTML Structure
+
+From `gastro.html` (lines 54-65):
+
+```html
+<article class="gastro-card">
+    <div class="gastro-card__numero" aria-hidden="true">01</div>
+    <div class="gastro-card__contenido">
+        <h2>Tapas y bares</h2>
+        <p>La esencia de la gastronomía granadina en el corazón del nuevo Neptuno. Bares de tapas con producto local, ambiente animado y la tradición de la tapa gratis con cada consumición.</p>
+        <ul class="gastro-lista">
+            <li>Tapas tradicionales granadinas</li>
+            <li>Producto local y de temporada</li>
+            <li>Terraza en el bulevar interior</li>
+        </ul>
+    </div>
+</article>
+```
+
+### CSS Styling
+
+From `style.css` (lines 574-658):
+
+```css
+.gastro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gastro-card {
+    background-color: var(--bg-secundario);
+    padding: 2.5rem;
+    border-top: 3px solid var(--color-primario);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: var(--transicion-suave);
+}
+
+.gastro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Decorative number */
+.gastro-card__numero {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #e0e0e0;
+    line-height: 1;
+}
+
+/* Content container */
+.gastro-card__contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gastro-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--texto-oscuro);
+    line-height: 1.2;
+}
+
+.gastro-card p {
+    font-size: 0.9rem;
+    color: var(--texto-muted);
+    line-height: 1.7;
+}
+
+/* List within card */
+.gastro-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.gastro-lista li {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    padding-left: 1.2rem;
+    position: relative;
+    letter-spacing: 0.3px;
+}
+
+.gastro-lista li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-primario);
+    font-weight: 700;
+}
+```
+
+### Responsive Behavior
+
+From `style.css` (lines 982-989, 1117-1119):
+
+```css
+/* Mobile: Single column */
+@media (max-width: 576px) {
+    .gastro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gastro-card {
+        padding: 2rem;
+    }
+}
+
+/* Tablet: Single column */
+@media (max-width: 992px) {
+    .gastro-grid {
+        grid-template-columns: 1fr;
+    }
+}
+```
+
+## Comparison
+
+<Tabs>
+  <Tab title="Landing Cards">
+    **Purpose**: Homepage navigation
+    
+    **Layout**: 2-column grid (1 column on mobile)
+    
+    **Features**:
+    - Entire card is clickable (`<a>` tag)
+    - Light gray background
+    - Hover changes background color
+    - CTA text with letter-spacing animation
+    - Border separators between cards
+    
+    **Elements**:
+    - Small uppercase label (golden)
+    - Large serif heading
+    - Descriptive paragraph
+    - Arrow CTA ("Descubrir →")
+  </Tab>
+  
+  <Tab title="Gastro Cards">
+    **Purpose**: Content display
+    
+    **Layout**: 3-column grid (1 column on tablet/mobile)
+    
+    **Features**:
+    - Not clickable (article element)
+    - Red top border accent
+    - Hover lifts card with shadow
+    - Large decorative number
+    - Feature list with custom bullets
+    
+    **Elements**:
+    - Decorative number (01, 02, 03)
+    - Serif heading
+    - Descriptive paragraph
+    - Feature list with border separator
+  </Tab>
+</Tabs>
+
+## Design Patterns
+
+<Card title="Hover Animations" icon="hand-pointer">
+  **Landing Cards**: Background color change + CTA letter-spacing increase
+  
+  **Gastro Cards**: Vertical lift (`translateY(-4px)`) + shadow elevation
+</Card>
+
+<Card title="Typography Hierarchy" icon="text-height">
+  Both card types use:
+  - Small uppercase labels (0.72-0.75rem)
+  - Playfair Display serif for headings
+  - Montserrat for body text
+  - Muted color for descriptions
+</Card>
+
+<Card title="Semantic HTML" icon="code">
+  - Landing cards use `<a>` tags (navigation)
+  - Gastro cards use `<article>` tags (content)
+  - Proper use of `aria-hidden="true"` for decorative numbers
+</Card>
+
+<Note>
+  Both card components use CSS Grid for responsive layouts and CSS custom properties (variables) for consistent colors and transitions.
+</Note>

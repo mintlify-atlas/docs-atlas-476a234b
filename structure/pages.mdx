@@ -1,0 +1,353 @@
+---
+title: Individual Pages
+description: Detailed breakdown of each HTML page structure and purpose
+---
+
+Proyecto Neptuno consists of 5 HTML pages, each with a specific purpose and semantic structure. All pages share a consistent layout pattern with header, main content, and footer.
+
+## Common Structure
+
+Every page follows this basic HTML5 structure:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title — Proyecto Neptuno</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><!-- Navigation --></header>
+    <main><!-- Page Content --></main>
+    <footer><!-- Footer Links --></footer>
+</body>
+</html>
+```
+
+<Note>
+  All pages use semantic HTML5 elements (`<header>`, `<main>`, `<footer>`, `<section>`, `<nav>`) for better accessibility and SEO.
+</Note>
+
+## Page Breakdown
+
+<Tabs>
+  <Tab title="index.html">
+    ### Homepage
+    
+    The landing page features a full-screen hero section and navigation cards.
+    
+    #### Hero Section
+    
+    ```html
+    <section id="hero">
+        <div class="container">
+            <h2>Un icono transformado para una nueva era de ocio y negocios en Granada.</h2>
+            <h1>Proyecto Neptuno</h1>
+            <div class="cta">
+                <a href="./proyecto.html" class="btn btn-primary">Descubrir el proyecto</a>
+                <a href="./contact.html" class="btn btn-secondary">Contacto</a>
+            </div>
+        </div>
+    </section>
+    ```
+    
+    **Key Features:**
+    - Background image with gradient overlay
+    - Centered text content
+    - Two call-to-action buttons
+    - Responsive typography
+    
+    #### Landing Grid
+    
+    ```html
+    <section class="landing-grid">
+        <a href="./ocio.html" class="landing-card">
+            <span class="landing-card__label">Cultura y ocio</span>
+            <h2>Cine, arcade y bolera</h2>
+            <p>Las mejores propuestas de entretenimiento de Granada bajo un mismo techo renovado.</p>
+            <span class="landing-card__cta">Descubrir →</span>
+        </a>
+
+        <a href="./gastro.html" class="landing-card">
+            <span class="landing-card__label">Gastronomía</span>
+            <h2>Tapas, restaurantes y más</h2>
+            <p>Una oferta gastronómica pensada para todos los momentos del día en el bulevar interior.</p>
+            <span class="landing-card__cta">Descubrir →</span>
+        </a>
+    </section>
+    ```
+    
+    **Structure:**
+    - Two-column grid layout
+    - Clickable card links
+    - Hover effects
+    - Visual hierarchy with labels, headings, and CTAs
+  </Tab>
+  
+  <Tab title="ocio.html">
+    ### Entertainment Page
+    
+    Showcases leisure offerings with alternating image-text blocks.
+    
+    #### Page Hero
+    
+    ```html
+    <section class="page-hero">
+        <span class="page-hero__label">Disfruta</span>
+        <h1>Cultura y ocio</h1>
+        <p>El nuevo Neptuno reúne las mejores propuestas de entretenimiento de Granada bajo un mismo techo renovado.</p>
+    </section>
+    ```
+    
+    #### Content Block Pattern
+    
+    ```html
+    <section class="ocio-bloque">
+        <div class="ocio-bloque__imagen">
+            <img src="./img/cine-megarama.jpg" alt="Megarama Cines Granada — entrada exterior">
+            <div class="ocio-bloque__imagen-detalle">
+                <img src="./img/cine-megarama-interior.jpg" alt="Sala interior Megarama Granada">
+            </div>
+        </div>
+
+        <div class="ocio-bloque__texto">
+            <span class="seccion-label">Cine</span>
+            <h2>Megarama Cines</h2>
+            <p>El cine de referencia en Granada sigue en Neptuno...</p>
+            <ul class="ocio-lista">
+                <li>8 salas de proyección</li>
+                <li>Sonido Dolby Digital</li>
+                <li>Programación nacional e internacional</li>
+                <li>Acceso directo desde el aparcamiento</li>
+            </ul>
+        </div>
+    </section>
+    ```
+    
+    **Features:**
+    - Two-column grid (image + text)
+    - Overlay detail image on main photo
+    - Feature lists with custom bullets
+    - Reverse layout modifier (`.ocio-bloque--reverse`)
+  </Tab>
+  
+  <Tab title="gastro.html">
+    ### Gastronomy Page
+    
+    Three-column card layout showcasing dining categories.
+    
+    #### Introduction Section
+    
+    ```html
+    <section class="gastro-intro">
+        <div class="gastro-intro__inner">
+            <p>El bulevar interior de 3.000 m² se convierte en el eje gastronómico del centro...</p>
+        </div>
+    </section>
+    ```
+    
+    #### Category Cards
+    
+    ```html
+    <section class="gastro-categorias">
+        <div class="gastro-grid">
+            <article class="gastro-card">
+                <div class="gastro-card__numero" aria-hidden="true">01</div>
+                <div class="gastro-card__contenido">
+                    <h2>Tapas y bares</h2>
+                    <p>La esencia de la gastronomía granadina en el corazón del nuevo Neptuno...</p>
+                    <ul class="gastro-lista">
+                        <li>Tapas tradicionales granadinas</li>
+                        <li>Producto local y de temporada</li>
+                        <li>Terraza en el bulevar interior</li>
+                    </ul>
+                </div>
+            </article>
+            <!-- More cards -->
+        </div>
+    </section>
+    ```
+    
+    **Structure:**
+    - Three-column responsive grid
+    - Decorative numbered cards
+    - Top border accent
+    - Hover lift effect
+  </Tab>
+  
+  <Tab title="proyecto.html">
+    ### Project Page
+    
+    Multi-section layout with image galleries showing renovation renders.
+    
+    #### Section Pattern
+    
+    ```html
+    <section class="proyecto-seccion">
+        <div class="proyecto-intro">
+            <span class="seccion-label">El proceso</span>
+            <h2>De lo que fue a lo que será</h2>
+            <p>La transformación del Neptuno parte de un análisis exhaustivo...</p>
+        </div>
+
+        <div class="render-grid render-grid--two">
+            <figure class="render-item">
+                <img src="./img/Secuencia-08.webp" alt="Fase de desmontaje y demolición">
+                <figcaption>Fase de desmontaje y demolición</figcaption>
+            </figure>
+            <figure class="render-item">
+                <img src="./img/Secuencia-07.webp" alt="Fase de remodelación y ampliación">
+                <figcaption>Fase de remodelación y ampliación</figcaption>
+            </figure>
+        </div>
+    </section>
+    ```
+    
+    **Gallery Layouts:**
+    - `.render-grid--two` - Two-column grid
+    - `.render-grid--one` - Single centered image
+    - `.render-item--full` - Full-width image
+    
+    #### Full-Width Render
+    
+    ```html
+    <figure class="render-item render-item--full">
+        <img src="./img/Secuencia-09.webp" alt="Vista exterior nocturna del nuevo Neptuno">
+        <figcaption>Vista exterior — Una nueva imagen para Granada</figcaption>
+    </figure>
+    ```
+  </Tab>
+  
+  <Tab title="contact.html">
+    ### Contact Page
+    
+    Advanced form with CSS-only tab switching for different user profiles.
+    
+    #### Radio Tab System
+    
+    ```html
+    <!-- Hidden radio inputs control tab state -->
+    <input type="radio" id="p-inversor" name="perfil" value="inversor" class="radio-perfil">
+    <input type="radio" id="p-marca" name="perfil" value="marca" class="radio-perfil">
+    <input type="radio" id="p-prensa" name="perfil" value="prensa" class="radio-perfil">
+    <input type="radio" id="p-ciudadano" name="perfil" value="ciudadano" class="radio-perfil">
+
+    <!-- Tab labels -->
+    <div class="profile-tabs">
+        <label for="p-inversor" class="tab">Inversor</label>
+        <label for="p-marca" class="tab">Marca</label>
+        <label for="p-prensa" class="tab">Prensa</label>
+        <label for="p-ciudadano" class="tab">Ciudadano</label>
+    </div>
+    ```
+    
+    #### Conditional Field Groups
+    
+    ```html
+    <!-- Fields shown when p-inversor is checked -->
+    <div id="fields-inversor" class="profile-fields">
+        <div class="form-row form-row--two">
+            <div class="form-group">
+                <label for="inv-empresa">Empresa u organización</label>
+                <input type="text" id="inv-empresa" name="inv_empresa">
+            </div>
+            <div class="form-group">
+                <label for="inv-cargo">Cargo</label>
+                <input type="text" id="inv-cargo" name="inv_cargo">
+            </div>
+        </div>
+        <!-- More fields -->
+    </div>
+    ```
+    
+    **CSS Tab Logic:**
+    
+    ```css
+    /* Hide all field groups by default */
+    .profile-fields { display: none; }
+
+    /* Show specific group when radio is checked */
+    #p-inversor:checked ~ #fields-inversor { display: block; }
+    #p-marca:checked ~ #fields-marca { display: block; }
+    #p-prensa:checked ~ #fields-prensa { display: block; }
+    #p-ciudadano:checked ~ #fields-ciudadano { display: block; }
+
+    /* Style active tab */
+    #p-inversor:checked ~ .profile-tabs label[for="p-inversor"] {
+        color: var(--color-primario);
+        border-bottom-color: var(--color-primario);
+    }
+    ```
+    
+    <Note type="info">
+      The contact form uses **zero JavaScript** — all tab switching is handled with CSS sibling selectors (`~`) and the `:checked` pseudo-class.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Semantic HTML Patterns
+
+### Accessible Structure
+
+All pages follow accessibility best practices:
+
+<CodeGroup>
+```html Header
+<header>
+    <div>
+        <a href="./index.html"><img src="./img/logo.png" alt="Logo CC Neptuno"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./ocio.html">Ocio</a></li>
+            <li><a href="./gastro.html">Gastronomía</a></li>
+            <li><a href="./proyecto.html">El Proyecto</a></li>
+            <li><a href="./contact.html">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+```html Footer
+<footer>
+    <div class="footer-inner">
+        <p class="footer-copy">2026 Proyecto Neptuno — Propuesta de renovación ficticia para Granada</p>
+        <nav class="footer-nav" aria-label="Navegación secundaria">
+            <a href="./index.html">Inicio</a>
+            <a href="./ocio.html">Ocio</a>
+            <a href="./gastro.html">Gastronomía</a>
+            <a href="./proyecto.html">El proyecto</a>
+            <a href="./contact.html">Contacto</a>
+        </nav>
+    </div>
+</footer>
+```
+</CodeGroup>
+
+**Accessibility Features:**
+- Descriptive `alt` text on all images
+- `aria-label` on secondary navigation
+- `aria-hidden` on decorative elements
+- Semantic heading hierarchy (h1 → h2)
+- Form labels properly associated with inputs
+
+## Responsive Considerations
+
+All pages adapt to different screen sizes using CSS media queries:
+
+- **Desktop (> 992px)**: Full multi-column layouts
+- **Tablet (768px - 992px)**: Adjusted grids, hamburger menu
+- **Mobile (< 576px)**: Single column, stacked layouts
+
+<Note type="tip">
+  The hamburger menu is implemented with pure CSS using a checkbox input and label system, similar to the contact form tabs.
+</Note>
+
+## Next Steps
+
+<Card title="Navigation Structure" icon="bars" href="/structure/navigation">
+  Learn how the header navigation and menu system work
+</Card>

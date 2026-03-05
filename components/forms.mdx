@@ -1,0 +1,324 @@
+---
+title: Form Components
+description: Contact form with radio-based profile tabs and dynamic field groups
+---
+
+The contact form uses an innovative **radio button tab system** to show different field groups based on user profile (Inversor, Marca, Prensa, Ciudadano).
+
+## Overview
+
+This form appears on `contact.html` and uses **pure CSS** to toggle between different field sets without JavaScript.
+
+## Form Structure
+
+From `contact.html` (lines 46-223):
+
+<CodeGroup>
+```html Common Fields
+<!-- COMMON FIELDS -->
+<div class="common-fields">
+    <div class="form-row form-row--two">
+        <div class="form-group">
+            <label for="nombre">Nombre <span class="required">*</span></label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="given-name">
+        </div>
+        <div class="form-group">
+            <label for="email">Correo electrónico <span class="required">*</span></label>
+            <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+        </div>
+    </div>
+</div>
+```
+
+```html Radio Tabs System
+<!-- TABS HEADING -->
+<div class="tabs-heading">
+    <span>¿Quién eres?</span>
+</div>
+
+<!-- HIDDEN RADIO INPUTS (must come before tabs and fields) -->
+<input type="radio" id="p-inversor" name="perfil" value="inversor" class="radio-perfil">
+<input type="radio" id="p-marca" name="perfil" value="marca" class="radio-perfil">
+<input type="radio" id="p-prensa" name="perfil" value="prensa" class="radio-perfil">
+<input type="radio" id="p-ciudadano" name="perfil" value="ciudadano" class="radio-perfil">
+
+<!-- TAB LABELS -->
+<div class="profile-tabs">
+    <label for="p-inversor" class="tab">Inversor</label>
+    <label for="p-marca" class="tab">Marca</label>
+    <label for="p-prensa" class="tab">Prensa</label>
+    <label for="p-ciudadano" class="tab">Ciudadano</label>
+</div>
+```
+
+```html Profile Fields (Example: Inversor)
+<!-- INVERSOR FIELDS -->
+<div id="fields-inversor" class="profile-fields">
+    <div class="form-row form-row--two">
+        <div class="form-group">
+            <label for="inv-empresa">Empresa u organización</label>
+            <input type="text" id="inv-empresa" name="inv_empresa" placeholder="Nombre de la empresa">
+        </div>
+        <div class="form-group">
+            <label for="inv-cargo">Cargo</label>
+            <input type="text" id="inv-cargo" name="inv_cargo" placeholder="Tu rol en la empresa">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="inv-rango">Rango de inversión estimada</label>
+            <div class="select-wrapper">
+                <select id="inv-rango" name="inv_rango">
+                    <option value="" disabled selected>Selecciona un rango</option>
+                    <option value="menos500">Menos de 500.000 €</option>
+                    <option value="500k-2m">Entre 500.000 € y 2.000.000 €</option>
+                    <option value="mas2m">Más de 2.000.000 €</option>
+                    <option value="determinar">Por determinar</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true">↓</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="inv-mensaje">Mensaje</label>
+            <textarea id="inv-mensaje" name="inv_mensaje" rows="5" placeholder="Cuéntanos tu interés..."></textarea>
+        </div>
+    </div>
+</div>
+```
+</CodeGroup>
+
+## CSS Styling
+
+### Form Base Styles
+
+From `style.css` (lines 693-766):
+
+```css
+.form-row {
+    margin-bottom: 1.5rem;
+}
+
+.form-row--two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texto-oscuro);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #d0d0d0;
+    background-color: var(--bg-principal);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: var(--texto-oscuro);
+    border-radius: 2px;
+    transition: var(--transicion-suave);
+    outline: none;
+    appearance: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(139, 29, 29, 0.08);
+}
+```
+
+### Radio Tab System
+
+From `style.css` (lines 789-865):
+
+```css
+/* Hide radio inputs */
+.radio-perfil {
+    display: none;
+}
+
+/* Tab container */
+.profile-tabs {
+    display: flex;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 2.5rem;
+    margin-top: 0.75rem;
+}
+
+/* Individual tabs */
+.tab {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--texto-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: var(--transicion-suave);
+    letter-spacing: 0.5px;
+}
+
+.tab:hover {
+    color: var(--texto-oscuro);
+}
+
+/* Hide all profile fields by default */
+.profile-fields {
+    display: none;
+}
+
+/* When radio is checked, activate corresponding tab style */
+#p-inversor:checked  ~ .profile-tabs label[for="p-inversor"],
+#p-marca:checked     ~ .profile-tabs label[for="p-marca"],
+#p-prensa:checked    ~ .profile-tabs label[for="p-prensa"],
+#p-ciudadano:checked ~ .profile-tabs label[for="p-ciudadano"] {
+    color: var(--color-primario);
+    border-bottom-color: var(--color-primario);
+}
+
+/* Show corresponding field group when radio is checked */
+#p-inversor:checked  ~ #fields-inversor  { display: block; }
+#p-marca:checked     ~ #fields-marca     { display: block; }
+#p-prensa:checked    ~ #fields-prensa    { display: block; }
+#p-ciudadano:checked ~ #fields-ciudadano { display: block; }
+```
+
+## Profile Types
+
+The form includes four different profile types, each with unique fields:
+
+<Tabs>
+  <Tab title="Inversor">
+    - Empresa u organización
+    - Cargo
+    - Rango de inversión (select dropdown)
+    - Mensaje (textarea)
+  </Tab>
+  
+  <Tab title="Marca">
+    - Nombre del negocio
+    - Sector (select dropdown)
+    - Superficie aproximada necesaria (m²)
+    - Mensaje (textarea)
+  </Tab>
+  
+  <Tab title="Prensa">
+    - Medio o publicación
+    - Tipo de cobertura (select dropdown)
+    - Ángulo o propuesta (textarea)
+  </Tab>
+  
+  <Tab title="Ciudadano">
+    - Motivo de contacto (select dropdown)
+    - Tu mensaje (textarea)
+  </Tab>
+</Tabs>
+
+## Custom Select Styling
+
+From `style.css` (lines 768-785):
+
+```css
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    cursor: pointer;
+    padding-right: 2.5rem;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--color-primario);
+    font-size: 0.8rem;
+}
+```
+
+## Form Footer
+
+From `contact.html` (lines 213-221):
+
+```html
+<div class="form-footer">
+    <div class="form-row form-row--checkbox">
+        <input type="checkbox" id="privacidad" name="privacidad" required>
+        <label for="privacidad">He leído y acepto la <a href="#">política de privacidad</a> del proyecto. <span class="required">*</span></label>
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+    </div>
+</div>
+```
+
+## How It Works
+
+<Note>
+  **Pure CSS Tab System**: The form uses the sibling selector (`~`) to show/hide field groups based on which radio button is checked. The radio inputs must appear in the DOM **before** the tabs and field groups for the CSS selectors to work.
+</Note>
+
+<Card title="DOM Order Matters" icon="list-ol">
+  The HTML structure order is critical:
+  1. Radio inputs (hidden)
+  2. Tab labels
+  3. Field groups
+  
+  This allows the `:checked ~ .profile-tabs` and `:checked ~ #fields-*` selectors to work properly.
+</Card>
+
+## Responsive Behavior
+
+From `style.css` (lines 996-1020):
+
+```css
+@media (max-width: 576px) {
+    .form-row--two {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tab {
+        text-align: center;
+        border-bottom: none;
+        border: 1px solid #e0e0e0;
+        padding: 0.75rem;
+    }
+
+    #p-inversor:checked  ~ .profile-tabs label[for="p-inversor"],
+    #p-marca:checked     ~ .profile-tabs label[for="p-marca"],
+    #p-prensa:checked    ~ .profile-tabs label[for="p-prensa"],
+    #p-ciudadano:checked ~ .profile-tabs label[for="p-ciudadano"] {
+        background-color: var(--color-primario);
+        color: var(--texto-claro);
+        border-color: var(--color-primario);
+    }
+}
+```
+
+On mobile, tabs display in a 2x2 grid and active tabs get a filled background instead of an underline.

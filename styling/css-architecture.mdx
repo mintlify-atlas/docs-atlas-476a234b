@@ -1,0 +1,159 @@
+---
+title: 'CSS Architecture'
+description: 'Overview of the CSS architecture and organization in Proyecto Neptuno'
+icon: 'sitemap'
+---
+
+## Overview
+
+Proyecto Neptuno uses a single, well-organized CSS file (`style.css`) that follows a component-based architecture with clear sectioning and modern CSS practices.
+
+## File Structure
+
+The stylesheet is organized into logical sections:
+
+```css
+/* 1. Font imports */
+@import url('https://fonts.googleapis.com/css2?family=...');
+
+/* 2. CSS Custom Properties (:root) */
+/* 3. Reset styles */
+/* 4. Base/general styles */
+/* 5. Component sections (Header, Hero, Forms, etc.) */
+/* 6. Responsive media queries */
+```
+
+## CSS Custom Properties (Variables)
+
+The project uses CSS custom properties defined in the `:root` selector for maintainability and theming:
+
+```css
+:root {
+    /* Colores Principales */
+    --color-primario: #8B1D1D;    /* Granate Corporativo */
+    --color-primario-claro: #A32A2A;
+    --color-secundario: #B89D64;  /* Dorado Champán */
+    --color-secundario-claro: #E5D1A4;
+    
+    /* Colores de Superficie y Fondos */
+    --bg-principal: #FFFFFF;
+    --bg-secundario: #F8F9FA;
+    --bg-footer: #1A1A1A;
+
+    /* Colores de Texto */
+    --texto-oscuro: #1A1A1A;
+    --texto-claro: #F5F5F5;
+    --texto-muted: #6C757D;
+
+    --transicion-suave: all 0.3s ease;
+}
+```
+
+<Info>
+Using CSS variables allows for easy theme customization and consistent color usage throughout the application.
+</Info>
+
+## Reset Styles
+
+A minimal CSS reset ensures consistent cross-browser rendering:
+
+```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img {
+    max-width: 100%;
+}
+```
+
+## Base Styles
+
+Global typography settings:
+
+```css
+body {
+    font-family: 'Montserrat';
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+}
+
+h2 {
+    font-weight: 500;
+}
+```
+
+## Component Organization
+
+The CSS is organized by page components with clear comment headers:
+
+<Accordion title="Main Component Sections">
+
+1. **Header** - Navigation and hamburger menu
+2. **Hero Section** - Landing page hero with background image
+3. **Landing Grid** - Two-column grid for landing cards
+4. **Page Hero** - Interior page headers
+5. **Ocio (Leisure)** - Image/text blocks for leisure pages
+6. **Proyecto (Project)** - Render grids and project sections
+7. **Gastro** - Restaurant category cards
+8. **Contact Form** - Form styles with tabs
+9. **Footer** - Site footer
+10. **Responsive** - Media queries
+
+</Accordion>
+
+## Naming Conventions
+
+The project uses BEM-inspired naming with double underscores for elements:
+
+```css
+.component { }              /* Block */
+.component__element { }     /* Element */
+.component--modifier { }    /* Modifier */
+```
+
+**Examples:**
+- `.landing-card`
+- `.landing-card__label`
+- `.landing-card__cta`
+- `.proyecto-seccion--dark`
+
+<Note>
+The consistent naming convention makes it easy to understand the relationship between CSS classes and HTML structure.
+</Note>
+
+## Transitions and Animations
+
+A global transition variable ensures consistent animations:
+
+```css
+:root {
+    --transicion-suave: all 0.3s ease;
+}
+
+/* Usage: */
+.landing-card {
+    transition: var(--transicion-suave);
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use CSS Variables" icon="palette">
+    Always reference `var(--color-primario)` instead of hardcoding colors
+  </Card>
+  <Card title="Component Sections" icon="layer-group">
+    Keep related styles together under comment headers
+  </Card>
+  <Card title="Mobile-First" icon="mobile">
+    Base styles for mobile, enhance with media queries
+  </Card>
+  <Card title="Semantic Names" icon="tag">
+    Use descriptive class names like `.gastro-card` instead of `.card-3`
+  </Card>
+</CardGroup>
